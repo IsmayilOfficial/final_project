@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.inducesmile.androidpayexample.ShoppingActivity">
+    tools:context="ut.ee.cs.myshop.ShoppingActivity">
 
     <FrameLayout
         android:id="@+id/frame_layout"
@@ -23,7 +23,7 @@
 
     </FrameLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_list"
         android:layout_below="@+id/frame_layout"
         android:layout_centerHorizontal="true"

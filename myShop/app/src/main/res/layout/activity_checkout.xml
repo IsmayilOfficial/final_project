@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
     android:background="@color/colorPrimaryLight"
-    tools:context="com.inducesmile.androidpayexample.CheckoutActivity">
+    tools:context="ut.ee.cs.myshop.CheckoutActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

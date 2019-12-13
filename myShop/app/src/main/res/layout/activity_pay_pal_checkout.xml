@@ -10,7 +10,7 @@
     android:orientation="vertical"
     android:gravity="center"
     android:background="@color/colorPrimaryLight"
-    tools:context="com.inducesmile.androidpayexample.PayPalCheckoutActivity">
+    tools:context="ut.ee.cs.myshop.PayPalCheckoutActivity">
 
     <Button
         android:id="@+id/pay_pal_button"
