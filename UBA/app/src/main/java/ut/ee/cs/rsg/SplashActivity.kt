@@ -1,7 +1,9 @@
 package ut.ee.cs.rsg
 
+import android.Manifest
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -11,11 +13,16 @@ import android.view.MotionEvent
 import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.GestureDetectorCompat
 import com.google.firebase.database.FirebaseDatabase
+import ut.ee.cs.rsg.authentification.LoginActivity
 import java.util.*
 
 class SplashActivity : AppCompatActivity() {
+
+
+
     var timer=0
     var scroll=0
     var singleTap=0
@@ -23,8 +30,11 @@ class SplashActivity : AppCompatActivity() {
     private var mGestureDetector: GestureDetectorCompat? = null
     val ra= UUID.randomUUID()
 
-    private val SPLASH_DISPLAY_LENGTH = 3000
+    private val SPLASH_DISPLAY_LENGTH = 6000
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
+
         requestWindowFeature(Window.FEATURE_NO_TITLE)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         super.onCreate(savedInstanceState)
@@ -59,7 +69,21 @@ class SplashActivity : AppCompatActivity() {
 
 
 
+        when {
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                    !== PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    !== PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)
+                    !== PackageManager.PERMISSION_GRANTED
+            -> {
+                ActivityCompat.requestPermissions( this, arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1 )
 
+
+
+
+
+
+            }
+        }
 
 
         mGestureDetector = GestureDetectorCompat(this, GestureListener())
@@ -67,7 +91,7 @@ class SplashActivity : AppCompatActivity() {
         val actionBar = supportActionBar
         actionBar?.hide()
         Handler().postDelayed({
-            val startActivityIntent = Intent(this@SplashActivity, ShoppingActivity::class.java)
+            val startActivityIntent = Intent(this, LoginActivity::class.java)
             startActivity(startActivityIntent)
             finish()
         }, SPLASH_DISPLAY_LENGTH.toLong())
