@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import ut.ee.cs.rsg.R
 
 class SimpleDividerItemDecoration(context: Context?) : ItemDecoration() {
-    private val mDivider: Drawable?
+    private val mDivider: Drawable? = ContextCompat.getDrawable(context!!, R.drawable.line_divider)
     override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         val left = parent.paddingLeft
         val right = parent.width - parent.paddingRight
@@ -24,7 +24,4 @@ class SimpleDividerItemDecoration(context: Context?) : ItemDecoration() {
         }
     }
 
-    init {
-        mDivider = ContextCompat.getDrawable(context!!, R.drawable.line_divider)
-    }
 }

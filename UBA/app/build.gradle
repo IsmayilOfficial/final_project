@@ -44,11 +44,12 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    implementation 'com.google.android.gms:play-services-wallet:9.4.0'
+
     implementation 'com.intuit.sdp:sdp-android:1.0.3'
     implementation 'com.mcxiaoke.volley:library:1.0.19'
     implementation 'com.google.code.gson:gson:2.6.1'
-    implementation('com.paypal.sdk:paypal-android-sdk:2.14.4')
+
+    implementation "com.google.android.gms:play-services-wallet:16.0.1"
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation "androidx.core:core-ktx:+"

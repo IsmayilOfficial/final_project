@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import ut.ee.cs.rsg.helpers.Constants
 
 class MySharedPreference(private val context: Context) {
-    private val prefs: SharedPreferences
+    private val prefs: SharedPreferences = context.getSharedPreferences(Constants.SHARED_PREF, Context.MODE_PRIVATE)
     fun addProductToTheCart(product: String?) {
         val edits = prefs.edit()
         edits.putString(Constants.PRODUCT_ID, product)
@@ -26,7 +26,4 @@ class MySharedPreference(private val context: Context) {
         return prefs.getInt(Constants.PRODUCT_COUNT, 0)
     }
 
-    init {
-        prefs = context.getSharedPreferences(Constants.SHARED_PREF, Context.MODE_PRIVATE)
-    }
 }

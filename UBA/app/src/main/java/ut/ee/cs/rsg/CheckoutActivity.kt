@@ -46,9 +46,11 @@ class CheckoutActivity : AppCompatActivity() {
             val shoppingIntent = Intent(this, ShoppingActivity::class.java)
             startActivity(shoppingIntent)
         }
+
+        // add google pay here
         val checkButton = (findViewById<View>(R.id.checkout) as Button)
         checkButton.setOnClickListener {
-            val paymentIntent = Intent(this, PayPalCheckoutActivity::class.java)
+            val paymentIntent = Intent(this, CheckoutActivityGooglePay::class.java)
             paymentIntent.putExtra("TOTAL_PRICE", mSubTotal)
             startActivity(paymentIntent)
         }

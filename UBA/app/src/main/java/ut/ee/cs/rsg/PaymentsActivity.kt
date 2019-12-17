@@ -31,7 +31,7 @@ class PaymentsActivity : AppCompatActivity(), ConnectionCallbacks, OnConnectionF
         val options = AddressOptions(WalletConstants.THEME_LIGHT)
         mGoogleApiClient = GoogleApiClient.Builder(this)
                 .enableAutoManage(this, this)
-                .setAccountName("Inducesmile")
+                .setAccountName("ISI11")
                 .addApi(Wallet.API, WalletOptions.Builder()
                         .setEnvironment(Constants.WALLET_ENVIRONMENT)
                         .setTheme(WalletConstants.THEME_LIGHT)
@@ -41,12 +41,11 @@ class PaymentsActivity : AppCompatActivity(), ConnectionCallbacks, OnConnectionF
         initializeWalletFragment()
         Wallet.Payments.isReadyToPay(mGoogleApiClient).setResultCallback { booleanResult ->
             if (booleanResult.status.isSuccess) {
-                if (booleanResult.value) { // Show Android Pay buttons
+                if (booleanResult.value) {
                     initializeWalletFragment()
-                } else { // Hide Android Pay buttons, show a message that Android Pay
-// cannot be used yet, and display a traditional checkout button
+                } else {
                 }
-            } else { // Error making isReadyToPay call
+            } else {
                 Log.e(TAG, "isReadyToPay:" + booleanResult.status)
             }
         }
@@ -79,9 +78,9 @@ class PaymentsActivity : AppCompatActivity(), ConnectionCallbacks, OnConnectionF
         val startParamsBuilder = WalletFragmentInitParams.newBuilder()
                 .setMaskedWalletRequest(sendMaskedWalletRequest())
                 .setMaskedWalletRequestCode(REQUEST_CODE_MASKED_WALLET)
-                .setAccountName("Inducesmile")
+                .setAccountName("ISI11")
         mWalletFragment!!.initialize(startParamsBuilder.build())
-        // add Wallet fragment to the UI
+
         supportFragmentManager.beginTransaction().replace(R.id.wallet_button_holder, mWalletFragment!!).commit()
     }
 
@@ -91,12 +90,10 @@ class PaymentsActivity : AppCompatActivity(), ConnectionCallbacks, OnConnectionF
                 .setPhoneNumberRequired(true)
                 .setShippingAddressRequired(true)
                 .setCurrencyCode(Constants.CURRENCY_CODE_USD)
-                .setEstimatedTotalPrice(cartTotal.toString()) // Create a Cart with the current line items. Provide all the information
-// available up to this point with estimates for shipping and tax included.
+                .setEstimatedTotalPrice(cartTotal.toString())
                 .setCart(Cart.newBuilder()
                         .setCurrencyCode(Constants.CURRENCY_CODE_USD)
-                        .setTotalPrice(cartTotal.toString()) //.setLineItems()
-                        .build())
+                        .setTotalPrice(cartTotal.toString())                        .build())
                 .setPaymentMethodTokenizationParameters(useStripePaymentGatewayForProcessing())
                 .build()
     }
@@ -157,7 +154,7 @@ class PaymentsActivity : AppCompatActivity(), ConnectionCallbacks, OnConnectionF
 
     fun handleError(errorCode: Int) {
         when (errorCode) {
-            WalletConstants.ERROR_CODE_SPENDING_LIMIT_EXCEEDED -> Toast.makeText(this@PaymentsActivity, "Error with your payment", Toast.LENGTH_LONG).show()
+            WalletConstants.ERROR_CODE_SPENDING_LIMIT_EXCEEDED -> Toast.makeText(this, "Error with your payment", Toast.LENGTH_LONG).show()
             WalletConstants.ERROR_CODE_INVALID_PARAMETERS, WalletConstants.ERROR_CODE_AUTHENTICATION_FAILURE, WalletConstants.ERROR_CODE_BUYER_ACCOUNT_ERROR, WalletConstants.ERROR_CODE_MERCHANT_ACCOUNT_ERROR, WalletConstants.ERROR_CODE_SERVICE_UNAVAILABLE, WalletConstants.ERROR_CODE_UNSUPPORTED_API_VERSION, WalletConstants.ERROR_CODE_UNKNOWN -> {
             }
             else -> {
