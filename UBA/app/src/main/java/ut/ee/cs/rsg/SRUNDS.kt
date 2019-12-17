@@ -40,8 +40,12 @@ var timer=0
     private var mRecorder: MediaRecorder? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        actionBar?.hide()
+
         super.onCreate(savedInstanceState)
+
         setContentView(R.layout.activity_activityx)
+
 
         var countDownTimer = object : CountDownTimer(120000, 1000) {
             override fun onFinish() {

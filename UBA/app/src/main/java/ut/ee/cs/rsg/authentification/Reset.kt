@@ -12,7 +12,7 @@ import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_reset.*
 import ut.ee.cs.rsg.R
 
-class ResetActivity : AppCompatActivity() {
+class Reset : AppCompatActivity() {
 
 
 
@@ -26,7 +26,7 @@ class ResetActivity : AppCompatActivity() {
         btn_reset_password.setOnClickListener(View.OnClickListener {
             val userEmail = email.text.toString().trim { it <= ' ' }
             if (TextUtils.isEmpty(userEmail)) {
-                Toast.makeText(this@ResetActivity, "Enter your register email id", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Enter your register email id", Toast.LENGTH_SHORT).show()
                 return@OnClickListener
             }
             progressBar.visibility = View.VISIBLE
@@ -34,9 +34,9 @@ class ResetActivity : AppCompatActivity() {
             firebaseAuth!!.sendPasswordResetEmail(userEmail)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
-                            Toast.makeText(this@ResetActivity, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "We have sent you instructions to reset your password!", Toast.LENGTH_SHORT).show()
                         } else {
-                            Toast.makeText(this@ResetActivity, "Failed to send reset email!", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "Failed to send reset email!", Toast.LENGTH_SHORT).show()
                         }
                         progressBar.visibility = View.GONE
                     }

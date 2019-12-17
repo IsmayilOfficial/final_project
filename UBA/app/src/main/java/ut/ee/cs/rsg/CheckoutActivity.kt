@@ -10,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
-import ut.ee.cs.rsg.adapters.CheckRecyclerViewAdapter
+import ut.ee.cs.rsg.adapters.CheckRVA
 import ut.ee.cs.rsg.entities.ProductObject
 import ut.ee.cs.rsg.helpers.MySharedPreference
 import ut.ee.cs.rsg.helpers.SimpleDividerItemDecoration
@@ -27,28 +27,28 @@ class CheckoutActivity : AppCompatActivity() {
         title = "Over Cart"
         subTotal = findViewById<View>(R.id.sub_total) as TextView
         checkRecyclerView = findViewById<View>(R.id.checkout_list) as RecyclerView
-        val linearLayoutManager = LinearLayoutManager(this@CheckoutActivity)
+        val linearLayoutManager = LinearLayoutManager(this)
         checkRecyclerView!!.layoutManager = linearLayoutManager
         checkRecyclerView!!.setHasFixedSize(true)
-        checkRecyclerView!!.addItemDecoration(SimpleDividerItemDecoration(this@CheckoutActivity))
-        // get content of cart
-        val mShared = MySharedPreference(this@CheckoutActivity)
+        checkRecyclerView!!.addItemDecoration(SimpleDividerItemDecoration(this))
+
+        val mShared = MySharedPreference(this)
         val builder = GsonBuilder()
         val gson = builder.create()
         val addCartProducts = gson.fromJson(mShared.retrieveProductFromCart(), Array<ProductObject>::class.java)
         val productList = convertObjectArrayToListObject(addCartProducts)
-        val mAdapter = CheckRecyclerViewAdapter(this@CheckoutActivity, productList)
+        val mAdapter = CheckRVA(this, productList)
         checkRecyclerView!!.adapter = mAdapter
         mSubTotal = getTotalPrice(productList)
-        subTotal!!.text = "Subtotal excluding tax and shipping: $mSubTotal $"
+        subTotal!!.text = "Subtotal: $mSubTotal $"
         val shoppingButton = (findViewById<View>(R.id.shopping) as Button)
         shoppingButton.setOnClickListener {
-            val shoppingIntent = Intent(this@CheckoutActivity, ShoppingActivity::class.java)
+            val shoppingIntent = Intent(this, ShoppingActivity::class.java)
             startActivity(shoppingIntent)
         }
         val checkButton = (findViewById<View>(R.id.checkout) as Button)
         checkButton.setOnClickListener {
-            val paymentIntent = Intent(this@CheckoutActivity, PayPalCheckoutActivity::class.java)
+            val paymentIntent = Intent(this, PayPalCheckoutActivity::class.java)
             paymentIntent.putExtra("TOTAL_PRICE", mSubTotal)
             startActivity(paymentIntent)
         }
@@ -75,7 +75,7 @@ class CheckoutActivity : AppCompatActivity() {
         var totalCost = 0.0
         for (i in mProducts.indices) {
             val pObject = mProducts[i]
-            totalCost = totalCost + pObject.productPrice
+            totalCost += pObject.productPrice
         }
         return totalCost
     }

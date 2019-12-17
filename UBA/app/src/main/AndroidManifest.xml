@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="ut.ee.cs.rsg">
-
-
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -15,7 +14,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppThemeChange"
+        tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".theme"></activity>
+
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
@@ -28,21 +30,25 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShoppingActivity" />
-        <activity android:name=".SRUNDS" />
+        <activity android:name=".SRUNDS"
+            />
         <activity android:name=".ProductActivity" />
         <activity android:name=".CheckoutActivity" />
         <activity android:name=".PaymentsActivity" />
-        <activity android:name=".PayPalCheckoutActivity"></activity>
-
-        <activity android:name=".authentification.MainActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".authentification.LoginActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-        <activity android:name=".authentification.SignupActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
-
-        <activity android:name="ut.ee.cs.rsg.authentification.ResetActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".PayPalCheckoutActivity"
+            />
+        <activity
+            android:name=".authentification.Profile"
+            />
+        <activity
+            android:name=".authentification.Login"
+         />
+        <activity
+            android:name=".authentification.Register"
+            />
+        <activity
+            android:name=".authentification.Reset"
+          />
     </application>
 
 </manifest>

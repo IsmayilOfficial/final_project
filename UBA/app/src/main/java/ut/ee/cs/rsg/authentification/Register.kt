@@ -12,8 +12,9 @@ import butterknife.ButterKnife
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_signup.*
 import ut.ee.cs.rsg.R
+import ut.ee.cs.rsg.ShoppingActivity
 
-class SignupActivity : AppCompatActivity() {
+class Register : AppCompatActivity() {
 
     private var firebaseAuth: FirebaseAuth? = null
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +24,7 @@ class SignupActivity : AppCompatActivity() {
         //click R.layout.activity_signup press alt + enter to generate
 //firebase authentication instance
         firebaseAuth = FirebaseAuth.getInstance()
-        reset_button.setOnClickListener { this.startActivity(Intent(this@SignupActivity, ResetActivity::class.java)) }
+        reset_button.setOnClickListener { this.startActivity(Intent(this, Reset::class.java)) }
         sign_in_button.setOnClickListener { finish() }
         sign_up_button.setOnClickListener { registerUser() }
     }
@@ -51,7 +52,7 @@ class SignupActivity : AppCompatActivity() {
                     if (!task.isSuccessful) {
                         showToast("Authentication failed. " + task.exception)
                     } else {
-                        this.startActivity(Intent(this, MainActivity::class.java))
+                        this.startActivity(Intent(this, ShoppingActivity::class.java))
                         finish()
                     }
                 }

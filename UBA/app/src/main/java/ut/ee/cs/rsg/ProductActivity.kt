@@ -5,16 +5,17 @@ import android.content.pm.ActivityInfo
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.text.Html
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
+import android.util.DisplayMetrics
+import android.view.*
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GestureDetectorCompat
+import com.google.firebase.database.FirebaseDatabase
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import ut.ee.cs.rsg.entities.ProductObject
@@ -22,6 +23,14 @@ import ut.ee.cs.rsg.helpers.MySharedPreference
 import java.util.*
 
 class ProductActivity : AppCompatActivity() {
+
+
+    var scroll=0
+    var singleTap=0
+    var  doubleTap=0
+    private var mGestureDetector: GestureDetectorCompat? = null
+    val ra: UUID = UUID.randomUUID()
+     var namePr=""
     private var productSize: TextView? = null
     private var productColor: TextView? = null
     private var productPrice: TextView? = null
@@ -46,12 +55,44 @@ class ProductActivity : AppCompatActivity() {
         val singleProduct = gson.fromJson(productInStringFormat, ProductObject::class.java)
         if (singleProduct != null) {
             title = singleProduct.productName
+            namePr=singleProduct.productName
+
             productImage!!.setImageResource(singleProduct.productImage)
             productSize!!.text = "Size: " + singleProduct.productSize.toString()
             productColor!!.text = "Color: " + singleProduct.productColor
             productPrice!!.text = "Price: " + singleProduct.productPrice.toInt().toString() + " $"
             productDescription!!.text = Html.fromHtml("<strong>Product Description</strong><br/>" + singleProduct.productDescription)
         }
+
+        Thread {
+
+            fun  getAndroidVersion():String {
+                var release = Build.VERSION.RELEASE;
+                var sdkVersion = Build.VERSION.SDK_INT;
+                return "Android SDK: $sdkVersion ($release)";
+            }
+
+            val vers=getAndroidVersion()
+            val displayMetrics = DisplayMetrics()
+
+            windowManager.defaultDisplay.getMetrics(displayMetrics)
+
+            var width = displayMetrics.widthPixels
+            var height = displayMetrics.heightPixels
+
+
+            val database = FirebaseDatabase.getInstance();
+            val myRef = database.getReference("$ra");
+
+
+            myRef.child("ScreenSize").setValue("$width,$height")
+            myRef.child("AndroidVersion").setValue("$vers")
+            myRef.child("Clicked Product").setValue("$namePr")
+
+
+
+
+        }.start()
         val addToCartButton = (findViewById<View>(R.id.add_to_cart) as Button)
         addToCartButton.setOnClickListener {
             //increase product count
@@ -122,6 +163,91 @@ class ProductActivity : AppCompatActivity() {
         return BitmapDrawable(resources, bitmap)
     }
 
+    private inner class GestureListener : GestureDetector.SimpleOnGestureListener() {
+
+        override fun onFling(
+                e1: MotionEvent,
+                e2: MotionEvent,
+                velocityX: Float,
+                velocityY: Float
+        ): Boolean {
+            var x=e1.x
+
+            var y=e1.y
+            var x2=e2.x
+
+            var y2=e2.y
+
+            scroll += 1
+
+            val database = FirebaseDatabase.getInstance();
+            val myRef = database.getReference("$ra");
+            var pre1=e1.pressure
+            var pre2=e2.pressure
+
+            myRef.child("scroll").setValue("$scroll;SplashActivity;FTC:$x,$y;STC:$x2,$y2,press:$pre1,$pre2")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            return super.onFling(e1, e2, velocityX, velocityY)
+
+        }
+
+        override fun onSingleTapConfirmed(e: MotionEvent
+
+        ): Boolean {
+
+            singleTap+=1
+
+            val database = FirebaseDatabase.getInstance();
+            val myRef = database.getReference("$ra");
+
+
+            var x=e.x
+
+            var y=e.y
+            var pre=e.pressure
+            myRef.child("singleTap").setValue("$singleTap,coord:$x,$y,press:$pre")
+
+            return super.onSingleTapConfirmed(e)
+        }
+
+        override fun onDoubleTap(e: MotionEvent): Boolean {
+
+            doubleTap += 1
+
+            var x=e.x
+
+            var y=e.y
+            var pre=e.pressure
+            val database = FirebaseDatabase.getInstance();
+            val myRef = database.getReference("$ra");
+
+
+            myRef.child("doubleTap").setValue("$doubleTap,coord:$x,$y,press:$pre")
+
+            return super.onDoubleTap(e)
+        }
+
+
+    }
+
+    override fun onTouchEvent(event: MotionEvent): Boolean {
+
+        mGestureDetector?.onTouchEvent(event)
+        return super.onTouchEvent(event)
+    }
     private fun invalidateCart() {
         invalidateOptionsMenu()
     }
@@ -129,4 +255,6 @@ class ProductActivity : AppCompatActivity() {
     companion object {
         private val TAG = ProductActivity::class.java.simpleName
     }
+
+
 }

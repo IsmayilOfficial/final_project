@@ -12,8 +12,9 @@ import com.google.firebase.auth.FirebaseAuth.AuthStateListener
 
 import kotlinx.android.synthetic.main.activity_main.*
 import ut.ee.cs.rsg.R
+import ut.ee.cs.rsg.SplashActivity
 
-class MainActivity : AppCompatActivity() {
+class Profile : AppCompatActivity() {
 
 
 
@@ -36,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         fireAuthListener = AuthStateListener { firebaseAuth ->
             val user1 = firebaseAuth.currentUser
             if (user1 == null) { //user not login
-                this.startActivity(Intent(this, LoginActivity::class.java))
+                this.startActivity(Intent(this, Login::class.java))
                 finish()
             }
         }
@@ -70,12 +71,12 @@ class MainActivity : AppCompatActivity() {
                 user.updateEmail(newEmailText)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                Toast.makeText(this@MainActivity,
+                                Toast.makeText(this,
                                         "Email address is updated. Please sign in with new email id!", Toast.LENGTH_SHORT).show()
                                 firebaseAuth!!.signOut()
                                 progressBar!!.visibility = View.GONE
                             } else {
-                                Toast.makeText(this@MainActivity, "Failed to update email!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Failed to update email!", Toast.LENGTH_SHORT).show()
                                 progressBar!!.visibility = View.GONE
                             }
                         }
@@ -103,11 +104,11 @@ class MainActivity : AppCompatActivity() {
                 user.updatePassword(newPasswordText)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                Toast.makeText(this@MainActivity, "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Password is updated, sign in with new password!", Toast.LENGTH_SHORT).show()
                                 firebaseAuth!!.signOut()
                                 progressBar!!.visibility = View.GONE
                             } else {
-                                Toast.makeText(this@MainActivity, "Failed to update password!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Failed to update password!", Toast.LENGTH_SHORT).show()
                                 progressBar!!.visibility = View.GONE
                             }
                         }
@@ -134,10 +135,10 @@ class MainActivity : AppCompatActivity() {
                 firebaseAuth!!.sendPasswordResetEmail(oldEmailText)
                         .addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                Toast.makeText(this@MainActivity, "Reset password email is sent!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Reset password email is sent!", Toast.LENGTH_SHORT).show()
                                 progressBar!!.visibility = View.GONE
                             } else {
-                                Toast.makeText(this@MainActivity, "Failed to send reset email!", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "Failed to send reset email!", Toast.LENGTH_SHORT).show()
                                 progressBar!!.visibility = View.GONE
                             }
                         }
@@ -148,18 +149,9 @@ class MainActivity : AppCompatActivity() {
         }
         //deleting some user
         remove_user_button.setOnClickListener {
-            progressBar!!.visibility = View.VISIBLE
-            user?.delete()?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Toast.makeText(this, "Your profile is deleted:( Create a account now!", Toast.LENGTH_SHORT).show()
-                    this.startActivity(Intent(this, SignupActivity::class.java))
-                    finish()
-                    progressBar!!.visibility = View.GONE
-                } else {
-                    Toast.makeText(this, "Failed to delete your account!", Toast.LENGTH_SHORT).show()
-                    progressBar!!.visibility = View.GONE
-                }
-            }
+            val startActivityIntent = Intent(this, SplashActivity::class.java)
+            startActivity(startActivityIntent)
+            finish()
         }
         //simple signing out
         sign_out.setOnClickListener { firebaseAuth!!.signOut() }

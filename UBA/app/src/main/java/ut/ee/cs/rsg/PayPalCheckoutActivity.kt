@@ -1,5 +1,6 @@
 package ut.ee.cs.rsg
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
@@ -40,14 +41,16 @@ class PayPalCheckoutActivity : AppCompatActivity() {
     }
 
     private fun initializePayPalPayment() {
-        val payment = PayPalPayment(BigDecimal(totalCostPrice.toString()), "USD", "Female Cloths", PayPalPayment.PAYMENT_INTENT_SALE)
+        val payment = PayPalPayment(BigDecimal(totalCostPrice.toString()), "USD", "Macbooks ", PayPalPayment.PAYMENT_INTENT_SALE)
         val intent = Intent(this, PaymentActivity::class.java)
         intent.putExtra(PayPalService.EXTRA_PAYPAL_CONFIGURATION, config)
         intent.putExtra(PaymentActivity.EXTRA_PAYMENT, payment)
         startActivityForResult(intent, 0)
     }
 
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK) {
             val confirm: PaymentConfirmation = data!!.getParcelableExtra(PaymentActivity.EXTRA_RESULT_CONFIRMATION)
             if (confirm != null) {
@@ -90,7 +93,7 @@ class PayPalCheckoutActivity : AppCompatActivity() {
                 MY_SOCKET_TIMEOUT_MS,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
-        VolleySingleton.Companion.getInstance(this@PayPalCheckoutActivity)!!.addToRequestQueue(serverRequest)
+        VolleySingleton.Companion.getInstance(this)!!.addToRequestQueue(serverRequest)
     }
 
     private fun createRequestSuccessListener(): Response.Listener<ServerObject> {
@@ -98,9 +101,9 @@ class PayPalCheckoutActivity : AppCompatActivity() {
             try {
                 Log.d(TAG, "Json Response " + response.success)
                 if (!TextUtils.isEmpty(response.success)) {
-                    Toast.makeText(this@PayPalCheckoutActivity, getString(R.string.successful_payment), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.successful_payment), Toast.LENGTH_LONG).show()
                 } else {
-                    Toast.makeText(this@PayPalCheckoutActivity, getString(R.string.server_error), Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, getString(R.string.server_error), Toast.LENGTH_LONG).show()
                 }
             } catch (e: Exception) {
                 e.printStackTrace()

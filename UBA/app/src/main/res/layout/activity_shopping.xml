@@ -15,20 +15,22 @@
 
         <ImageView
             android:id="@+id/recent_news_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="384dp"
+            android:layout_height="177dp"
             android:adjustViewBounds="true"
             android:background="@drawable/trending"
-            android:contentDescription="@string/app_name"/>
+            android:contentDescription="@string/app_name" />
 
     </FrameLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_list"
+        android:layout_width="396dp"
+        android:layout_height="474dp"
         android:layout_below="@+id/frame_layout"
-        android:layout_centerHorizontal="true"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="-28dp"
+        android:layout_marginBottom="25dp"
         android:orientation="vertical"
         android:scrollbars="none" />
 

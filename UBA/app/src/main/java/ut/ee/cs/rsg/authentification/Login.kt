@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 import ut.ee.cs.rsg.R
 import ut.ee.cs.rsg.ShoppingActivity
 
-class LoginActivity : AppCompatActivity() {
+class Login : AppCompatActivity() {
 
 
 
@@ -23,21 +23,24 @@ class LoginActivity : AppCompatActivity() {
 
 
 
-    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var Auth: FirebaseAuth
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        firebaseAuth = FirebaseAuth.getInstance()
-        //auto login process
-//move to main activity if user already sign in
-        if (firebaseAuth.currentUser != null) { // User is logged in
-            startActivity(Intent(this, ShoppingActivity::class.java))
-            finish()
+        Auth = FirebaseAuth.getInstance()
+
+
+
+        when {
+            Auth.currentUser != null -> {
+                startActivity(Intent(this, ShoppingActivity::class.java))
+                finish()
+            }
         }
         setContentView(R.layout.activity_login)
         ButterKnife.bind(this)
-        firebaseAuth = FirebaseAuth.getInstance()
-        btn_signup.setOnClickListener { this.startActivity(Intent(this, SignupActivity::class.java)) }
-        reset_button.setOnClickListener { this.startActivity(Intent(this, ResetActivity::class.java)) }
+        Auth = FirebaseAuth.getInstance()
+        btn_signup.setOnClickListener { this.startActivity(Intent(this, Register::class.java)) }
+        reset_button.setOnClickListener { this.startActivity(Intent(this, Reset::class.java)) }
         login_button.setOnClickListener(View.OnClickListener {
             val useremail = email.text.toString()
             val userpassword = password.text.toString()
@@ -51,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
             }
             progressBar.visibility = View.VISIBLE
             //login user
-            firebaseAuth.signInWithEmailAndPassword(useremail, userpassword)
+            Auth.signInWithEmailAndPassword(useremail, userpassword)
                     .addOnCompleteListener { task ->
                         progressBar.visibility = View.GONE
                         if (!task.isSuccessful) {

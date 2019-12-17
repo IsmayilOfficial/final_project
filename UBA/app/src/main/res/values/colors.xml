@@ -13,7 +13,12 @@
 
     <color name="colorPrimary">#00bcd4</color>
     <color name="colorPrimaryDark">#0097a7</color>
-    <color name="colorAccent">#f2fe71</color>
+    <color name="colorAccent">#111010</color>
+
+
+
+    <color name="textPrimary">#000000</color>
+    <color name="textSecondary">#555555</color>
 
     <color name="bg_login">#26ae90</color>
     <color name="bg_register">#2e3237</color>
@@ -27,7 +32,7 @@
     <color name="btn_login">#26ae90</color>
     <color name="btn_login_bg">#eceef1</color>
     <color name="lbl_name">#333333</color>
-    <color name="btn_logut_bg">#ff6861</color>
+    <color name="btn_logut_bg">#FF6861</color>
 </resources>
 
 

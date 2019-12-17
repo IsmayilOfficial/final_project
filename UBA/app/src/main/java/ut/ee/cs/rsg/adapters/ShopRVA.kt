@@ -10,13 +10,13 @@ import ut.ee.cs.rsg.ProductActivity
 import ut.ee.cs.rsg.R
 import ut.ee.cs.rsg.entities.ProductObject
 
-class ShopRecyclerViewAdapter(private val context: Context, private val allProducts: List<ProductObject>) : RecyclerView.Adapter<ShopRecyclerViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopRecyclerViewHolder {
+class ShopRVA(private val context: Context, private val allProducts: List<ProductObject>) : RecyclerView.Adapter<ShopRVH>() {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopRVH {
         val layoutView = LayoutInflater.from(parent.context).inflate(R.layout.product_listing, parent, false)
-        return ShopRecyclerViewHolder(layoutView)
+        return ShopRVH(layoutView)
     }
 
-    override fun onBindViewHolder(holder: ShopRecyclerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ShopRVH, position: Int) {
         val singleProduct = allProducts[position]
         holder.productName.text = singleProduct.productName
         holder.produceImage.setImageResource(singleProduct.productImage)
@@ -35,7 +35,7 @@ class ShopRecyclerViewAdapter(private val context: Context, private val allProdu
     }
 
     companion object {
-        private val TAG = ShopRecyclerViewAdapter::class.java.simpleName
+        private val TAG = ShopRVA::class.java.simpleName
     }
 
 }
