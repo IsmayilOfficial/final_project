@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/icons"
+
     tools:context="ut.ee.cs.rsg.ProductActivity">
 
     <LinearLayout
@@ -36,7 +36,7 @@
                     android:textSize="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_48sdp"
                     android:text="@string/product_size"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="@color/btn_logut_bg"/>
 
                 <TextView
                     android:id="@+id/product_color"
@@ -45,7 +45,7 @@
                     android:textSize="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_32sdp"
                     android:text="@string/product_color"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="@color/btn_logut_bg"/>
 
                 <TextView
                     android:id="@+id/product_price"
@@ -54,7 +54,7 @@
                     android:textSize="@dimen/_13sdp"
                     android:layout_marginTop="@dimen/_32sdp"
                     android:text="@string/product_price"
-                    android:textColor="@color/colorAccent"/>
+                    android:textColor="@color/btn_logut_bg"/>
 
             </LinearLayout>
 
@@ -68,7 +68,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:contentDescription="@string/android_pay"
-                    android:src="@drawable/productonebig"
+                    android:src="@drawable/macbook2015"
                     android:scaleType="centerCrop"/>
 
             </LinearLayout>
@@ -90,7 +90,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:lineSpacingMultiplier="1.2"
-            android:textColor="@color/colorPrimaryText"
+            android:textColor="@color/btn_logut_bg"
             android:text="@string/description_example"
             android:textSize="@dimen/_12sdp"/>
 

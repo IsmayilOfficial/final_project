@@ -20,7 +20,11 @@ class CheckRVA(private val context: Context, private val mProductObject: List<Pr
         holder.productPrice.text = mProductObject[position].productPrice.toString() + " $"
         holder.removeProduct.setOnClickListener {
 
-            Toast.makeText(context, "not implemented yet ", Toast.LENGTH_LONG).show() }
+            holder.quantity.text = "0"
+            holder.productName.text = "deleted"
+            holder.productPrice.text = "0"
+            mProductObject[position].productPrice=0.0
+            }
     }
 
     override fun getItemCount(): Int {

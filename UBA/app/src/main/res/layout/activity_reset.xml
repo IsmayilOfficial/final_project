@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    android:background="#FAF9F9"
-    android:fitsSystemWindows="true"
-    tools:context=".authentification.ResetActivity">
+    android:fitsSystemWindows="false"
+    tools:context=".authentification.Reset">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -40,7 +40,7 @@
             android:gravity="center_horizontal"
             android:padding="@dimen/activity_horizontal_margin"
             android:text="@string/forgot_password_msg"
-            android:textColor="@android:color/black"
+            android:textColor="#303F9F"
             android:textSize="14dp" />
 
         <RelativeLayout
@@ -55,7 +55,7 @@
                 android:layout_marginBottom="10dp"
                 android:hint="@string/hint_email"
                 android:inputType="textEmailAddress"
-                android:textColor="@android:color/black"
+                android:textColor="#303F9F"
                 android:textColorHint="#512DA8" />
         </RelativeLayout>
 

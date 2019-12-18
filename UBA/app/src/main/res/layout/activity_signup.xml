@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".authentification.SignupActivity">
+    tools:context=".authentification.Register">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FDFCFC"
+
         android:gravity="center"
         android:orientation="vertical"
         android:padding="@dimen/activity_horizontal_margin">
@@ -35,6 +35,7 @@
                 android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textColorHint="#512DA8"
                 android:textColor="@android:color/black" />
         </RelativeLayout>
 
@@ -53,6 +54,7 @@
                 android:inputType="textPassword"
                 android:maxLines="1"
                 android:singleLine="true"
+                android:textColorHint="#512DA8"
                 android:textColor="@android:color/black" />
         </RelativeLayout>
 
@@ -75,9 +77,9 @@
             android:background="@null"
             android:text="@string/btn_forgot_password"
             android:textAllCaps="false"
-            android:textColor="@color/colorAccent" />
+            android:textColor="#1930C5" />
 
-        <!--Link to sign in activity-->
+
 
         <Button
             android:id="@+id/sign_in_button"
@@ -87,7 +89,7 @@
             android:background="@null"
             android:text="@string/btn_link_to_login"
             android:textAllCaps="false"
-            android:textColor="#0C0C0C"
+            android:textColor="#1930C5"
             android:textSize="15sp" />
 
     </LinearLayout>

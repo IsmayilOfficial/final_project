@@ -39,11 +39,11 @@ class ShoppingActivity : AppCompatActivity() {
         setContentView(R.layout.activity_shopping)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         shoppingRecyclerView = findViewById<View>(R.id.product_list) as RecyclerView
-        val mGrid = GridLayoutManager(this@ShoppingActivity, 2)
+        val mGrid = GridLayoutManager(this, 2)
         shoppingRecyclerView!!.layoutManager = mGrid
         shoppingRecyclerView!!.setHasFixedSize(true)
         shoppingRecyclerView!!.addItemDecoration(SpacesItemDecoration(2, 12, false))
-        val shopAdapter = ShopRVA(this@ShoppingActivity, allProductsOnSale)
+        val shopAdapter = ShopRVA(this, allProductsOnSale)
         shoppingRecyclerView!!.adapter = shopAdapter
         Handler().postDelayed({
 

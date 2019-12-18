@@ -20,9 +20,8 @@ class Register : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
-        ButterKnife.bind(this) //using butterknife fot finding widgets
-        //click R.layout.activity_signup press alt + enter to generate
-//firebase authentication instance
+        ButterKnife.bind(this)
+
         firebaseAuth = FirebaseAuth.getInstance()
         reset_button.setOnClickListener { this.startActivity(Intent(this, Reset::class.java)) }
         sign_in_button.setOnClickListener { finish() }
@@ -45,7 +44,6 @@ class Register : AppCompatActivity() {
             return
         }
         progress_bar.visibility = View.VISIBLE
-        //register user
         firebaseAuth!!.createUserWithEmailAndPassword(userEmail, userPassword)
                 .addOnCompleteListener(this) { task ->
                     Log.d(TAG, "New user registration: " + task.isSuccessful)

@@ -43,20 +43,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dark_theme" />
 
-        <RadioButton
-                android:id="@+id/themeBattery"
-                style="@style/SecondaryText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/battery_saver_theme" />
-
-        <RadioButton
-                android:id="@+id/themeSystem"
-                style="@style/SecondaryText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/system_theme" />
-
     </RadioGroup>
 
     <Button

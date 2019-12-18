@@ -59,16 +59,11 @@ class theme : AppCompatActivity() {
     }
 
     private fun initTheme() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P){
-            themeSystem.visibility = View.VISIBLE
-        } else {
-            themeSystem.visibility = View.GONE
-        }
+
         when (getSavedTheme()) {
             THEME_LIGHT -> themeLight.isChecked = true
             THEME_DARK -> themeDark.isChecked = true
-            THEME_SYSTEM -> themeSystem.isChecked = true
-            THEME_BATTERY -> themeBattery.isChecked = true
+
             THEME_UNDEFINED -> {
                 when (resources.configuration.uiMode.and(Configuration.UI_MODE_NIGHT_MASK)) {
                     Configuration.UI_MODE_NIGHT_NO -> themeLight.isChecked = true

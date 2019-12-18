@@ -13,9 +13,11 @@
         android:layout_width="101dp"
         android:layout_height="97dp"
         android:layout_marginStart="188dp"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="56dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.942"
+        app:layout_constraintHorizontal_bias="0.786"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_delete" />
@@ -23,26 +25,27 @@
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="251dp"
-        android:layout_height="376dp"
+        android:layout_height="182dp"
         android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.352"
+        app:layout_constraintVertical_bias="0.532"
         app:srcCompat="@drawable/macbook2019" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="307dp"
         android:layout_height="153dp"
-        android:text="MacBook Pro Retina 15 Inch 256 GB Flash (SSD) 2.4 Ghz 8 GB (1600 Mhz) - B grade - Refurbished"
+        android:layout_marginTop="13dp"
 
+        android:text="MacBook Pro Retina 15 Inch 256 GB Flash (SSD) 2.4 Ghz 8 GB (1600 Mhz) - B grade - Refurbished"
         android:textColor="@color/btn_logut_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.259"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

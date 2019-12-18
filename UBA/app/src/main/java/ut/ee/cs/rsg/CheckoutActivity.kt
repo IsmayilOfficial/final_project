@@ -3,6 +3,7 @@ package ut.ee.cs.rsg
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.gson.GsonBuilder
+import kotlinx.android.synthetic.main.activity_checkout.*
+import kotlinx.android.synthetic.main.check_layout.*
 import ut.ee.cs.rsg.adapters.CheckRVA
 import ut.ee.cs.rsg.entities.ProductObject
 import ut.ee.cs.rsg.helpers.MySharedPreference
@@ -18,14 +21,14 @@ import java.util.*
 
 class CheckoutActivity : AppCompatActivity() {
     private var checkRecyclerView: RecyclerView? = null
-    private var subTotal: TextView? = null
+
     private var mSubTotal = 0.0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_checkout)
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         title = "Over Cart"
-        subTotal = findViewById<View>(R.id.sub_total) as TextView
+
         checkRecyclerView = findViewById<View>(R.id.checkout_list) as RecyclerView
         val linearLayoutManager = LinearLayoutManager(this)
         checkRecyclerView!!.layoutManager = linearLayoutManager
@@ -35,19 +38,22 @@ class CheckoutActivity : AppCompatActivity() {
         val mShared = MySharedPreference(this)
         val builder = GsonBuilder()
         val gson = builder.create()
-        val addCartProducts = gson.fromJson(mShared.retrieveProductFromCart(), Array<ProductObject>::class.java)
-        val productList = convertObjectArrayToListObject(addCartProducts)
+        var addCartProducts = gson.fromJson(mShared.retrieveProductFromCart(),Array<ProductObject>::class.java)
+        var productList = convertObjectArrayToListObject(addCartProducts)
         val mAdapter = CheckRVA(this, productList)
         checkRecyclerView!!.adapter = mAdapter
         mSubTotal = getTotalPrice(productList)
-        subTotal!!.text = "Subtotal: $mSubTotal $"
-        val shoppingButton = (findViewById<View>(R.id.shopping) as Button)
-        shoppingButton.setOnClickListener {
+
+
+
+
+        shopping.setOnClickListener {
             val shoppingIntent = Intent(this, ShoppingActivity::class.java)
             startActivity(shoppingIntent)
         }
 
-        // add google pay here
+
+
         val checkButton = (findViewById<View>(R.id.checkout) as Button)
         checkButton.setOnClickListener {
             val paymentIntent = Intent(this, CheckoutActivityGooglePay::class.java)
@@ -81,6 +87,7 @@ class CheckoutActivity : AppCompatActivity() {
         }
         return totalCost
     }
+
 
     companion object {
         private val TAG = CheckoutActivity::class.java.simpleName

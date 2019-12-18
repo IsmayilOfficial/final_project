@@ -7,19 +7,6 @@
         android:title="@string/action_cart"
         app:showAsAction="ifRoom" />
 
-    <item
-        android:id="@+id/add_dark"
-        app:showAsAction="never"
-        android:title="dark mode"
-        >
-    </item>
-    <item
-        android:id="@+id/add_action"
-        app:showAsAction="never"
-        android:title="profile">
-    </item>
-    <item android:title="clear app data"
-        app:showAsAction="never"
-        android:id="@+id/settings_action"></item>
+
 
 </menu>
