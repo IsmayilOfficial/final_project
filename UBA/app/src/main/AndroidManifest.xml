@@ -53,12 +53,9 @@
 
         <activity
             android:name=".CheckoutActivityGooglePay"
-            android:label="@string/store_name"
+
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+
         </activity>
 
         <!-- This element is required in order to use the PaymentsClient -->
